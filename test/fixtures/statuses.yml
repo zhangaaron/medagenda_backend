@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  details: MyText
+  time_expire: 2016-04-19 21:29:52
+
+two:
+  details: MyText
+  time_expire: 2016-04-19 21:29:52
