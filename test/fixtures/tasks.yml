@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  details: MyString
+  color: 1
+  time_due: 2016-04-19 20:48:24
+  repeat_time: 1
+
+two:
+  details: MyString
+  color: 1
+  time_due: 2016-04-19 20:48:24
+  repeat_time: 1
