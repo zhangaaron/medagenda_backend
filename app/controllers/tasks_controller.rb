@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :json_request?
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
@@ -29,8 +31,8 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
-        format.json { render :show, status: :created, location: @task }
+        format.html { redirect_to patient_task_path(Patient.find(params[:patient_id]), @task), notice: 'Task was successfully created.' }
+        format.json { render :show, status: :created, location: patient_task_path(Patient.find(params[:patient_id]), @task) }
       else
         format.html { render :new }
         format.json { render json: @task.errors, status: :unprocessable_entity }
@@ -43,7 +45,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
+        format.html { redirect_to patient_task_path(Patient.find(@patient_id), @task), notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
@@ -71,5 +73,11 @@ class TasksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
       params[:task]
+    end
+
+    protected
+
+    def json_request?
+      request.format.json?
     end
 end
