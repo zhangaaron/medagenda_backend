@@ -1,6 +1,4 @@
 class TasksController < ApplicationController
-  protect_from_forgery
-  skip_before_action :verify_authenticity_token, if: :json_request?
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
@@ -72,12 +70,8 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params[:task]
+      params.permit(Task.columns.map {|x| x.name} -['id'])
     end
 
-    protected
 
-    def json_request?
-      request.format.json?
-    end
 end

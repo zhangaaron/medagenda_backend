@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20160421010307) do
     t.string   "firstname"
   end
 
-  create_table "statuses", force: :cascade do |t|
+  create_table "status", force: :cascade do |t|
     t.text     "details"
     t.datetime "time_expire"
     t.datetime "created_at",  null: false

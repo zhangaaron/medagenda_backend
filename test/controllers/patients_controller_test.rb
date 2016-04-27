@@ -18,7 +18,7 @@ class PatientsControllerTest < ActionController::TestCase
 
   test "should create patient" do
     assert_difference('Patient.count') do
-      post :create, patient: { dob: @patient.dob, lastname: @patient.lastname, room: @patient.room, statuses: @patient.statuses, tasks: @patient.tasks }
+      post :create, patient: { dob: @patient.dob, lastname: @patient.lastname, room: @patient.room, status: @patient.statuses, tasks: @patient.tasks }
     end
 
     assert_redirected_to patient_path(assigns(:patient))
@@ -35,7 +35,7 @@ class PatientsControllerTest < ActionController::TestCase
   end
 
   test "should update patient" do
-    patch :update, id: @patient, patient: { dob: @patient.dob, lastname: @patient.lastname, room: @patient.room, statuses: @patient.statuses, tasks: @patient.tasks }
+    patch :update, id: @patient, patient: { dob: @patient.dob, lastname: @patient.lastname, room: @patient.room, status: @patient.statuses, tasks: @patient.tasks }
     assert_redirected_to patient_path(assigns(:patient))
   end
 
