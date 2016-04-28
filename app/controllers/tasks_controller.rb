@@ -6,6 +6,7 @@ class TasksController < ApplicationController
   def index
     @patient = Patient.find(params[:patient_id])
     @tasks = @patient.tasks.all
+
   end
 
   # GET /tasks/1
@@ -43,10 +44,10 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to patient_task_path(Patient.find(@patient_id), @task), notice: 'Task was successfully updated.' }
-        format.json { render :show, status: :ok, location: @task }
+        format.html { redirect_to patient_task_path(Patient.find(params[:patient_id]), @task), notice: 'Task was successfully updated.' }
+        format.json { render :show, status: :created, location: patient_task_path(Patient.find(params[:patient_id]), @task) }
       else
-        format.html { render :edit }
+        format.html { render :new }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -70,7 +71,7 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.permit(Task.columns.map {|x| x.name} -['id'])
+      params.permit(Task.columns.map {|x| x.name})
     end
 
 

@@ -4,7 +4,6 @@ class PatientsController < ApplicationController
   # GET /patients
   # GET /patients.json
   def index
-    Rails.logger.info(request.env)
     @patients = Patient.all
     # respond_to do |format|
     #   format.html

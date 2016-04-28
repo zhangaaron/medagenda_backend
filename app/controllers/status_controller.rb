@@ -41,11 +41,11 @@ class StatusController < ApplicationController
   # PATCH/PUT /status/1.json
   def update
     respond_to do |format|
-      if @status.update(status_params)
+      if @status.save
         format.html { redirect_to @status, notice: 'Status was successfully updated.' }
-        format.json { render :show, status: :ok, location: @status }
+        format.json { render :show, status: :created, location: @status }
       else
-        format.html { render :edit }
+        format.html { render :new }
         format.json { render json: @status.errors, status: :unprocessable_entity }
       end
     end
