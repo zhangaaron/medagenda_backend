@@ -28,8 +28,8 @@ class StatusController < ApplicationController
 
     respond_to do |format|
       if @status.save
-        format.html { redirect_to @status, notice: 'Status was successfully created.' }
-        format.json { render :show, status: :created, location: @status }
+        format.html { redirect_to patient_status_path(Patient.find(params[:patient_id]), @status), notice: 'Status was successfully created.' }
+        format.json { render :show, status: :created, location: patient_status_path(Patient.find(params[:patient_id]), @status) }
       else
         format.html { render :new }
         format.json { render json: @status.errors, status: :unprocessable_entity }
@@ -41,9 +41,9 @@ class StatusController < ApplicationController
   # PATCH/PUT /status/1.json
   def update
     respond_to do |format|
-      if @status.save
-        format.html { redirect_to @status, notice: 'Status was successfully updated.' }
-        format.json { render :show, status: :created, location: @status }
+      if @status.update(status_params)
+        format.html { redirect_to patient_status_path(Patient.find(params[:patient_id]), @status), notice: 'Status was successfully updated.' }
+        format.json { render :show, status: :created, location: patient_status_path(Patient.find(params[:patient_id]), @status) }
       else
         format.html { render :new }
         format.json { render json: @status.errors, status: :unprocessable_entity }
@@ -56,7 +56,7 @@ class StatusController < ApplicationController
   def destroy
     @status.destroy
     respond_to do |format|
-      format.html { redirect_to statuses_url, notice: 'Status was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Status was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +69,6 @@ class StatusController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def status_params
-      params.permit(Status.columns.map {|x| x.name} -['id'])
+      params.permit(Status.columns.map {|x| x.name})
     end
 end
